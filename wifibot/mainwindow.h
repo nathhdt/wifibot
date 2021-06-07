@@ -3,6 +3,7 @@
 
 #include "robot.h"
 #include <QMainWindow>
+#include <QtWebEngineWidgets>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,15 +15,18 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void insertConsole(QString text);
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
-    void on_pushButton_2_clicked();
+    void on_pushButton_Connexion_clicked();
+
+    void on_pushButton_Deconnexion_clicked();
 
 private:
     Ui::MainWindow *ui;
     Robot wifibotv3;
+    QWebEngineView *view;
 
 };
 #endif // MAINWINDOW_H

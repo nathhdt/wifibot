@@ -18,7 +18,7 @@ Robot::Robot(QObject *parent) : QObject(parent) {
 }
 
 
-void Robot::doConnect() {
+void Robot::doConnect(QString ip, int port) {
     socket = new QTcpSocket(this); // socket creation
     connect(socket, SIGNAL(connected()),this, SLOT(connected()));
     connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
@@ -26,7 +26,7 @@ void Robot::doConnect() {
     connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
     qDebug() << "connecting..."; // this is not blocking call
     //socket->connectToHost("LOCALHOST", 15020);
-    socket->connectToHost("192.168.1.11", 15020); // connection to wifibot
+    socket->connectToHost(ip, (quint16)port); // connection to wifibot
     // we need to wait...
     if(!socket->waitForConnected(5000)) {
         qDebug() << "Error: " << socket->errorString();
