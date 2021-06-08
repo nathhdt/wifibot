@@ -58,8 +58,6 @@ void MainWindow::on_pushButton_Connexion_clicked()
         // Connexion au robot
         bool tryConn = wifibotv3.doConnect(ui->lineEdit_IP->text(), ui->lineEdit_Port->text().toInt());
 
-        qDebug() << tryConn;
-
         if (tryConn == true)
         {
             // Affichage de la caméra
