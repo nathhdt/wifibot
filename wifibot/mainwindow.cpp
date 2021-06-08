@@ -56,18 +56,38 @@ void MainWindow::on_pushButton_Connexion_clicked()
         ui->plainTextEdit_console->repaint();
 
         // Connexion au robot
-        wifibotv3.doConnect(ui->lineEdit_IP->text(), ui->lineEdit_Port->text().toInt());
+        bool tryConn = wifibotv3.doConnect(ui->lineEdit_IP->text(), ui->lineEdit_Port->text().toInt());
 
-        // Affichage de la caméra
-        ui->plainTextEdit_console->appendPlainText("[Caméra] Connexion à la caméra");
-        QString url = "http://" + ui->lineEdit_IP->text() + ":8080/?action=stream.html";
-        view->load(QUrl(url));
-        view->setZoomFactor(1.66);
-        view->show();
+        qDebug() << tryConn;
 
-        // Active le bouton de déconnexion
-        ui->pushButton_Deconnexion->setEnabled(true);
-        ui->pushButton_Deconnexion->repaint();
+        if (tryConn == true)
+        {
+            // Affichage de la caméra
+            showCamera();
+
+            // Active les boutons nécessaires
+            ui->pushButton_Deconnexion->setEnabled(true);
+            ui->pushButton_Deconnexion->repaint();
+            ui->pushButton_droite->setEnabled(true);
+            ui->pushButton_droite->repaint();
+            ui->pushButton_gauche->setEnabled(true);
+            ui->pushButton_gauche->repaint();
+            ui->pushButton_avancer->setEnabled(true);
+            ui->pushButton_avancer->repaint();
+            ui->pushButton_reculer->setEnabled(true);
+            ui->pushButton_reculer->repaint();
+            ui->pushButton_stop->setEnabled(true);
+            ui->pushButton_stop->repaint();
+            ui->pushButton_Screenshot->setEnabled(true);
+            ui->pushButton_Screenshot->repaint();
+        } else if (tryConn == false) {
+            ui->plainTextEdit_console->appendPlainText("[Connexion] Impossible de se connecter au robot");
+            // Désactive le bouton de connexion
+            ui->pushButton_Connexion->setEnabled(true);
+            ui->pushButton_Connexion->repaint();
+        }
+
+
     }
 }
 
@@ -76,11 +96,43 @@ void MainWindow::on_pushButton_Deconnexion_clicked()
     // Désactive le bouton de déconnexion
     ui->pushButton_Deconnexion->setEnabled(false);
     ui->pushButton_Deconnexion->repaint();
+    ui->pushButton_droite->setEnabled(false);
+    ui->pushButton_droite->repaint();
+    ui->pushButton_gauche->setEnabled(false);
+    ui->pushButton_gauche->repaint();
+    ui->pushButton_avancer->setEnabled(false);
+    ui->pushButton_avancer->repaint();
+    ui->pushButton_reculer->setEnabled(false);
+    ui->pushButton_reculer->repaint();
+    ui->pushButton_stop->setEnabled(false);
+    ui->pushButton_stop->repaint();
+    ui->pushButton_Screenshot->setEnabled(false);
+    ui->pushButton_Screenshot->repaint();
 
     // Déconnexion du robot
     wifibotv3.disConnect();
 
     // Reset du WebEngine
+    hideCamera();
+
+    // Active le bouton de connexion
+    ui->pushButton_Connexion->setEnabled(true);
+    ui->pushButton_Connexion->repaint();
+
+    ui->plainTextEdit_console->appendPlainText("[Connexion] Robot déconnecté");
+}
+
+void MainWindow::showCamera()
+{
+    ui->plainTextEdit_console->appendPlainText("[Caméra] Connexion à la caméra");
+    QString url = "http://" + ui->lineEdit_IP->text() + ":8080/?action=stream.html";
+    view->load(QUrl(url));
+    view->setZoomFactor(view->zoomFactor()*1.66);
+    view->show();
+}
+
+void MainWindow::hideCamera()
+{
     QString deconnecte = "<html>"
             "<body style='background-color:#303030;font-family:Helvetica,sans-serif;'>"
                 "<h5 style='color:#eeeeee;text-align:center;line-height:150px;'>Le robot est déconnecté</h5>"
@@ -88,10 +140,4 @@ void MainWindow::on_pushButton_Deconnexion_clicked()
         "</html>";
     view->setHtml(deconnecte);
     view->setZoomFactor(1);
-
-    // Active le bouton de connexion
-    ui->pushButton_Connexion->setEnabled(true);
-    ui->pushButton_Connexion->repaint();
-
-    ui->plainTextEdit_console->appendPlainText("[Connexion] Robot déconnecté");
 }

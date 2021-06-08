@@ -16,15 +16,17 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     void insertConsole(QString text);
+    void showCamera();
+    void hideCamera();
+
+    Ui::MainWindow *ui;
     ~MainWindow();
 
 private slots:
     void on_pushButton_Connexion_clicked();
-
     void on_pushButton_Deconnexion_clicked();
 
 private:
-    Ui::MainWindow *ui;
     Robot wifibotv3;
     QWebEngineView *view;
 

@@ -12,7 +12,7 @@ class Robot : public QObject {
     Q_OBJECT
 public:
     explicit Robot(QObject *parent = 0);
-    void doConnect(QString ip, int port);
+    bool doConnect(QString ip, int port);
     void disConnect();
     QByteArray DataToSend;
     QByteArray DataReceived;

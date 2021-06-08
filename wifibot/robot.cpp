@@ -13,25 +13,28 @@ Robot::Robot(QObject *parent) : QObject(parent) {
     DataToSend[8] = 0x0;
     DataReceived.resize(21);
     TimerEnvoi = new QTimer();
-    // setup signal and slot
+
     connect(TimerEnvoi, SIGNAL(timeout()), this, SLOT(MyTimerSlot())); //Send data to wifibot timer
 }
 
-
-void Robot::doConnect(QString ip, int port) {
-    socket = new QTcpSocket(this); // socket creation
+bool Robot::doConnect(QString ip, int port) {
+    socket = new QTcpSocket(this); // Socket creation
     connect(socket, SIGNAL(connected()),this, SLOT(connected()));
     connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
     connect(socket, SIGNAL(bytesWritten(qint64)),this, SLOT(bytesWritten(qint64)));
     connect(socket, SIGNAL(readyRead()),this, SLOT(readyRead()));
-    qDebug() << "connecting..."; // this is not blocking call
-    //socket->connectToHost("LOCALHOST", 15020);
-    socket->connectToHost(ip, (quint16)port); // connection to wifibot
-    // we need to wait...
+
+    qDebug() << "Connecting...";
+
+    socket->connectToHost(ip, (quint16)port); // Connexion au Wifibot
+
     if(!socket->waitForConnected(5000)) {
         qDebug() << "Error: " << socket->errorString();
-        return;
+        return false;
     }
+
+    return true;
+
     TimerEnvoi->start(75);
 }
 
@@ -41,11 +44,12 @@ void Robot::disConnect() {
 }
 
 void Robot::connected() {
-    qDebug() << "connected..."; // Hey server, tell me about you.
+    qDebug() << "Connected!";
+
 }
 
 void Robot::disconnected() {
-    qDebug() << "disconnected...";
+    qDebug() << "Disconnected!";
 }
 
 void Robot::bytesWritten(qint64 bytes) {
@@ -53,7 +57,7 @@ void Robot::bytesWritten(qint64 bytes) {
 }
 
 void Robot::readyRead() {
-    qDebug() << "reading..."; // read the data from the socket
+    qDebug() << "Reading from socket..."; // read the data from the socket
     DataReceived = socket->readAll();
     emit updateUI(DataReceived);
     qDebug() << DataReceived[0] << DataReceived[1] << DataReceived[2];
