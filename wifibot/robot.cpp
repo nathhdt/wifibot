@@ -33,9 +33,8 @@ bool Robot::doConnect(QString ip, int port) {
         return false;
     }
 
-    return true;
-
     TimerEnvoi->start(75);
+    return true;
 }
 
 void Robot::disConnect() {

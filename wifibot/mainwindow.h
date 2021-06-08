@@ -28,6 +28,22 @@ private slots:
 
     void on_pushButton_Screenshot_clicked();
 
+    void on_pushButton_avancer_pressed();
+
+    void on_pushButton_reculer_pressed();
+
+    void on_pushButton_avancer_released();
+
+    void on_pushButton_reculer_released();
+
+    void on_pushButton_gauche_pressed();
+
+    void on_pushButton_gauche_released();
+
+    void on_pushButton_droite_pressed();
+
+    void on_pushButton_droite_released();
+
 private:
     Robot wifibotv3;
     QWebEngineView *view;

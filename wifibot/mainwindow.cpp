@@ -173,3 +173,43 @@ void MainWindow::on_pushButton_Screenshot_clicked()
 
     ui->plainTextEdit_console->appendPlainText("[Caméra] Capture d'écran enregistrée sous " + imgFileName);
 }
+
+void MainWindow::on_pushButton_avancer_pressed()
+{
+    wifibotv3.Avant(120, 120);
+}
+
+void MainWindow::on_pushButton_avancer_released()
+{
+    wifibotv3.Avant(0, 0);
+}
+
+void MainWindow::on_pushButton_reculer_pressed()
+{
+    wifibotv3.Arriere(120, 120);
+}
+
+void MainWindow::on_pushButton_reculer_released()
+{
+    wifibotv3.Arriere(0, 0);
+}
+
+void MainWindow::on_pushButton_gauche_pressed()
+{
+    wifibotv3.Gauche(120, 120);
+}
+
+void MainWindow::on_pushButton_gauche_released()
+{
+    wifibotv3.Gauche(0, 0);
+}
+
+void MainWindow::on_pushButton_droite_pressed()
+{
+    wifibotv3.Droite(120, 120);
+}
+
+void MainWindow::on_pushButton_droite_released()
+{
+    wifibotv3.Droite(0, 0);
+}
