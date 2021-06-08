@@ -166,3 +166,29 @@ void Robot::Stop(){
 
     connect(TimerEnvoi, SIGNAL(timeout()), this, SLOT(MyTimerSlot()));
 }
+
+// // // // // // // // // // // //
+        //SLOW SPEED TRANSITION  //
+// // // // // // // // // // // //
+
+bool Robot::slowSpeedChange(int endValue, float pas){ //Goal is to provide a progressive acceleration to the wheels
+
+    if (endValue<_speed){
+        pas=-pas;
+    }
+
+    int nowValue= (int) (_speed + pas);
+    int flag=true;
+
+    if (pas>=1){
+        if (nowValue<endValue){
+            _speed=nowValue;
+        }
+        else{
+            _speed=endValue;
+            flag=false;
+        }
+    }
+
+    return flag;//if speed can be incremented , flag is true, if speed has reached the end Value, it returns false.
+}

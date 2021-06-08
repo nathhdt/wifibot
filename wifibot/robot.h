@@ -15,8 +15,9 @@ public:
     void doConnect(QString ip, int port);
     void disConnect();
     QByteArray DataToSend;
-    QByteArray DataReceived;
+    QByteArray DataReceived;// [2]->batteryLvl /;/ [3]->IRG_AV; [4]->IRG_AR; [11]->IRD_AV; [12]IRD_AR /;/ [8][7][6][5]->odométrie => is a float
     QMutex Mutex;
+    int _speed;
 signals:
     void updateUI(const QByteArray Data);
 public slots:
@@ -32,6 +33,7 @@ public slots:
     void Droite(short speed1, short speed2);
     void Stop();
     short Crc16(unsigned char *_Adresse_tab, unsigned char Taille_Max);
+    bool slowSpeedChange(int endValue, float pas);
 private:
     QTcpSocket *socket;
     QTimer *TimerEnvoi;
