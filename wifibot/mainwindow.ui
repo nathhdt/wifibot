@@ -144,6 +144,9 @@
      <string>Direction</string>
     </property>
     <widget class="QPushButton" name="pushButton_gauche">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -157,10 +160,13 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../resources/fleche_gauche.png</normaloff>../../resources/fleche_gauche.png</iconset>
+       <normaloff>../resources/fleche_gauche.png</normaloff>../resources/fleche_gauche.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_avancer">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -174,10 +180,13 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../resources/fleche_haut.png</normaloff>../../resources/fleche_haut.png</iconset>
+       <normaloff>../resources/fleche_haut.png</normaloff>../resources/fleche_haut.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_droite">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>70</x>
@@ -191,10 +200,13 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../resources/fleche_bas.png</normaloff>../../resources/fleche_bas.png</iconset>
+       <normaloff>../resources/fleche_bas.png</normaloff>../resources/fleche_bas.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_reculer">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -208,10 +220,13 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../resources/fleche_droite.png</normaloff>../../resources/fleche_droite.png</iconset>
+       <normaloff>../resources/fleche_droite.png</normaloff>../resources/fleche_droite.png</iconset>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_stop">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -225,7 +240,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../resources/stop.png</normaloff>../../resources/stop.png</iconset>
+       <normaloff>../resources/stop.png</normaloff>../resources/stop.png</iconset>
      </property>
     </widget>
    </widget>
@@ -234,7 +249,7 @@
      <rect>
       <x>140</x>
       <y>10</y>
-      <width>531</width>
+      <width>481</width>
       <height>51</height>
      </rect>
     </property>
@@ -251,7 +266,7 @@
       </rect>
      </property>
      <property name="value" stdset="0">
-      <double>43.000000000000000</double>
+      <double>0.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_KMH">
@@ -282,7 +297,7 @@
       </rect>
      </property>
      <property name="value" stdset="0">
-      <double>43.000000000000000</double>
+      <double>90.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_Batterie">
@@ -303,7 +318,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../../resources/batterie.png</pixmap>
+      <pixmap>../resources/batterie.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -322,7 +337,7 @@
       </rect>
      </property>
      <property name="value" stdset="0">
-      <double>43.000000000000000</double>
+      <double>12.000000000000000</double>
      </property>
     </widget>
     <widget class="QLabel" name="label_Infrarouge">
@@ -369,6 +384,32 @@
     </property>
     <property name="backgroundVisible">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Screenshot">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>630</x>
+      <y>20</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../resources/screenshot.png</normaloff>../resources/screenshot.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>32</width>
+      <height>32</height>
+     </size>
     </property>
    </widget>
   </widget>

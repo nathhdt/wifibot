@@ -12,7 +12,7 @@ class Robot : public QObject {
     Q_OBJECT
 public:
     explicit Robot(QObject *parent = 0);
-    void doConnect(QString ip, int port);
+    bool doConnect(QString ip, int port);
     void disConnect();
     QByteArray DataToSend;
     QByteArray DataReceived;// [2]->batteryLvl /;/ [3]->IRG_AV; [4]->IRG_AR; [11]->IRD_AV; [12]IRD_AR /;/ [8][7][6][5]->odométrie => is a float
