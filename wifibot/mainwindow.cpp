@@ -78,6 +78,18 @@ void MainWindow::on_pushButton_Connexion_clicked()
             ui->pushButton_stop->repaint();
             ui->pushButton_Screenshot->setEnabled(true);
             ui->pushButton_Screenshot->repaint();
+            ui->pushButton_Camera_Haut->setEnabled(true);
+            ui->pushButton_Camera_Haut->repaint();
+            ui->pushButton_Camera_Bas->setEnabled(true);
+            ui->pushButton_Camera_Bas->repaint();
+            ui->pushButton_Camera_Droite->setEnabled(true);
+            ui->pushButton_Camera_Droite->repaint();
+            ui->pushButton_Camera_Gauche->setEnabled(true);
+            ui->pushButton_Camera_Gauche->repaint();
+
+
+
+
         } else if (tryConn == false) {
             ui->plainTextEdit_console->appendPlainText("[Connexion] Impossible de se connecter au robot");
             // Désactive le bouton de connexion
@@ -106,6 +118,14 @@ void MainWindow::on_pushButton_Deconnexion_clicked()
     ui->pushButton_stop->repaint();
     ui->pushButton_Screenshot->setEnabled(false);
     ui->pushButton_Screenshot->repaint();
+    ui->pushButton_Camera_Haut->setEnabled(false);
+    ui->pushButton_Camera_Haut->repaint();
+    ui->pushButton_Camera_Bas->setEnabled(false);
+    ui->pushButton_Camera_Bas->repaint();
+    ui->pushButton_Camera_Droite->setEnabled(false);
+    ui->pushButton_Camera_Droite->repaint();
+    ui->pushButton_Camera_Gauche->setEnabled(false);
+    ui->pushButton_Camera_Gauche->repaint();
 
     // Déconnexion du robot
     wifibotv3.disConnect();
@@ -138,4 +158,18 @@ void MainWindow::hideCamera()
         "</html>";
     view->setHtml(deconnecte);
     view->setZoomFactor(1);
+}
+
+void MainWindow::on_pushButton_Screenshot_clicked()
+{
+    QSize size(512,385);
+    QImage img(size, QImage::Format_ARGB32);
+    QPainter paintView(&img);
+    view->render(&paintView);
+    paintView.end();
+
+    QString imgFileName = QDir::homePath() + "/Desktop/Wifibot_" + QDateTime::currentDateTime().toString("dd-MM-yyyy_hh'h'mm'm'ss's'") + ".jpg";
+    img.save(imgFileName);
+
+    ui->plainTextEdit_console->appendPlainText("[Caméra] Capture d'écran enregistrée sous " + imgFileName);
 }

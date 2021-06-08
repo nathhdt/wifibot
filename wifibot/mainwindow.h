@@ -26,6 +26,8 @@ private slots:
     void on_pushButton_Connexion_clicked();
     void on_pushButton_Deconnexion_clicked();
 
+    void on_pushButton_Screenshot_clicked();
+
 private:
     Robot wifibotv3;
     QWebEngineView *view;

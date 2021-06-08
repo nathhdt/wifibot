@@ -137,7 +137,7 @@
       <x>10</x>
       <y>120</y>
       <width>121</width>
-      <height>81</height>
+      <height>101</height>
      </rect>
     </property>
     <property name="title">
@@ -149,8 +149,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>50</y>
+       <x>20</x>
+       <y>60</y>
        <width>21</width>
        <height>22</height>
       </rect>
@@ -169,8 +169,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>20</y>
+       <x>50</x>
+       <y>30</y>
        <width>21</width>
        <height>22</height>
       </rect>
@@ -189,8 +189,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>50</y>
+       <x>80</x>
+       <y>60</y>
        <width>21</width>
        <height>22</height>
       </rect>
@@ -209,8 +209,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>50</y>
+       <x>50</x>
+       <y>60</y>
        <width>21</width>
        <height>22</height>
       </rect>
@@ -411,6 +411,99 @@
       <height>32</height>
      </size>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_Camera">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>121</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Camera</string>
+    </property>
+    <widget class="QPushButton" name="pushButton_Camera_Gauche">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>21</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../resources/fleche_gauche.png</normaloff>../resources/fleche_gauche.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Camera_Haut">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>30</y>
+       <width>21</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../resources/fleche_haut.png</normaloff>../resources/fleche_haut.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Camera_Droite">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>60</y>
+       <width>21</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../resources/fleche_bas.png</normaloff>../resources/fleche_bas.png</iconset>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_Camera_Bas">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>60</y>
+       <width>21</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../resources/fleche_droite.png</normaloff>../resources/fleche_droite.png</iconset>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
