@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../resources/icon.png</normaloff>../../resources/icon.png</iconset>
+    <normaloff>../resources/icon.png</normaloff>../resources/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox_Connexion">
@@ -107,6 +107,9 @@
      </property>
      <property name="text">
       <string>Connexion</string>
+     </property>
+     <property name="shortcut">
+      <string>Return</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_Deconnexion">
@@ -422,7 +425,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>Camera</string>
+     <string>Caméra</string>
     </property>
     <widget class="QPushButton" name="pushButton_Camera_Gauche">
      <property name="enabled">

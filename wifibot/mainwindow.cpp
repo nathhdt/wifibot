@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include <QRegExpValidator>
+#include <QKeyEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,11 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
     // RegEx port
     ui->lineEdit_Port->setValidator(new QRegExpValidator(QRegExp("[0-9]{5}")));
 
-
     // Setup camera
     view = new QWebEngineView(parent);
-
-
     ui->gridLayout->addWidget(view);
 }
 
@@ -86,18 +84,13 @@ void MainWindow::on_pushButton_Connexion_clicked()
             ui->pushButton_Camera_Droite->repaint();
             ui->pushButton_Camera_Gauche->setEnabled(true);
             ui->pushButton_Camera_Gauche->repaint();
-
-
-
-
         } else if (tryConn == false) {
             ui->plainTextEdit_console->appendPlainText("[Connexion] Impossible de se connecter au robot");
+
             // Désactive le bouton de connexion
             ui->pushButton_Connexion->setEnabled(true);
             ui->pushButton_Connexion->repaint();
         }
-
-
     }
 }
 
@@ -176,6 +169,7 @@ void MainWindow::on_pushButton_Screenshot_clicked()
 
 void MainWindow::on_pushButton_avancer_pressed()
 {
+    ui->plainTextEdit_console->appendPlainText("[Direction] Avant (Z)");
     wifibotv3.Avant(120, 120);
 }
 
@@ -186,6 +180,7 @@ void MainWindow::on_pushButton_avancer_released()
 
 void MainWindow::on_pushButton_reculer_pressed()
 {
+    ui->plainTextEdit_console->appendPlainText("[Direction] Arrière (S)");
     wifibotv3.Arriere(120, 120);
 }
 
@@ -196,6 +191,7 @@ void MainWindow::on_pushButton_reculer_released()
 
 void MainWindow::on_pushButton_gauche_pressed()
 {
+    ui->plainTextEdit_console->appendPlainText("[Direction] Gauche (Q)");
     wifibotv3.Gauche(120, 120);
 }
 
@@ -206,6 +202,7 @@ void MainWindow::on_pushButton_gauche_released()
 
 void MainWindow::on_pushButton_droite_pressed()
 {
+    ui->plainTextEdit_console->appendPlainText("[Direction] Droite (Q)");
     wifibotv3.Droite(120, 120);
 }
 

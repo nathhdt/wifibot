@@ -56,14 +56,14 @@ void Robot::bytesWritten(qint64 bytes) {
 }
 
 void Robot::readyRead() {
-    qDebug() << "Reading from socket..."; // read the data from the socket
+    qDebug() << "Reading from socket...";
     DataReceived = socket->readAll();
     emit updateUI(DataReceived);
     qDebug() << DataReceived[0] << DataReceived[1] << DataReceived[2];
 }
 
 void Robot::MyTimerSlot() {
-    qDebug() << "Timer...";
+    qDebug() << "[Timer] Clock";
     while(Mutex.tryLock());
     socket->write(DataToSend);
     Mutex.unlock();
