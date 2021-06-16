@@ -25,6 +25,9 @@ public:
 private slots:
     void on_pushButton_Connexion_clicked();
     void on_pushButton_Deconnexion_clicked();
+    void update_Robot_Informations();
+
+    void on_pushButton_stop_clicked();
 
 private:
     Robot wifibotv3;
