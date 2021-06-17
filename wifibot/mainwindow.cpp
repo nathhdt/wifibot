@@ -1,8 +1,9 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QWidget>
 #include <QRegExpValidator>
 #include <QKeyEvent>
+#include <algorithm>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -86,6 +87,8 @@ void MainWindow::on_pushButton_Connexion_clicked()
             ui->pushButton_Camera_Droite->repaint();
             ui->pushButton_Camera_Gauche->setEnabled(true);
             ui->pushButton_Camera_Gauche->repaint();
+            ui->horizontalSlider_Vitesse->setEnabled(true);
+            ui->horizontalSlider_Vitesse->repaint();
         } else if (tryConn == false) {
             ui->plainTextEdit_console->appendPlainText("[Connexion] Impossible de se connecter au robot");
 
@@ -121,6 +124,8 @@ void MainWindow::on_pushButton_Deconnexion_clicked()
     ui->pushButton_Camera_Droite->repaint();
     ui->pushButton_Camera_Gauche->setEnabled(false);
     ui->pushButton_Camera_Gauche->repaint();
+    ui->horizontalSlider_Vitesse->setEnabled(false);
+    ui->horizontalSlider_Vitesse->repaint();
 
     // Déconnexion du robot
     wifibotv3.disConnect();
@@ -172,7 +177,7 @@ void MainWindow::on_pushButton_Screenshot_clicked()
 void MainWindow::on_pushButton_avancer_pressed()
 {
     ui->plainTextEdit_console->appendPlainText("[Direction] Avant (Z)");
-    wifibotv3.Avant(120, 120);
+    wifibotv3.Avant(ui->horizontalSlider_Vitesse->value(), ui->horizontalSlider_Vitesse->value());
 }
 
 void MainWindow::on_pushButton_avancer_released()
@@ -183,7 +188,7 @@ void MainWindow::on_pushButton_avancer_released()
 void MainWindow::on_pushButton_reculer_pressed()
 {
     ui->plainTextEdit_console->appendPlainText("[Direction] Arrière (S)");
-    wifibotv3.Arriere(120, 120);
+    wifibotv3.Arriere(ui->horizontalSlider_Vitesse->value(), ui->horizontalSlider_Vitesse->value());
 }
 
 void MainWindow::on_pushButton_reculer_released()
@@ -194,7 +199,7 @@ void MainWindow::on_pushButton_reculer_released()
 void MainWindow::on_pushButton_gauche_pressed()
 {
     ui->plainTextEdit_console->appendPlainText("[Direction] Gauche (Q)");
-    wifibotv3.Gauche(120, 120);
+    wifibotv3.Gauche(ui->horizontalSlider_Vitesse->value(), ui->horizontalSlider_Vitesse->value());
 }
 
 void MainWindow::on_pushButton_gauche_released()
@@ -205,7 +210,7 @@ void MainWindow::on_pushButton_gauche_released()
 void MainWindow::on_pushButton_droite_pressed()
 {
     ui->plainTextEdit_console->appendPlainText("[Direction] Droite (Q)");
-    wifibotv3.Droite(120, 120);
+    wifibotv3.Droite(ui->horizontalSlider_Vitesse->value(), ui->horizontalSlider_Vitesse->value());
 }
 
 void MainWindow::on_pushButton_droite_released()
@@ -264,10 +269,15 @@ void MainWindow::update_Robot_Informations(){
     unsigned char DistD_AV=10+((255-wifibotv3.getIRD_AV())*130/255);
     unsigned char DistD_AR=10+((255-wifibotv3.getIRD_AR())*130/255);
 
+    unsigned char DistAV= std::min((int)DistG_AV, (int)DistD_AV);
+    unsigned char DistAR= std::min((int)DistG_AR,(int) DistD_AR);
     // Update UI
     qDebug()<< wifibotv3.getBatteryLvl();
     ui->lcdNumber_Batterie->setProperty("value",QVariant((QVariant) ((wifibotv3.getBatteryLvl()))));
     ui->lcdNumber_KMH->setProperty("value",QVariant((QVariant) (((int)(wifibotv3.getMediumSpeed()*3.6)))));
+    ui->lcdNumber_InfrarougeAR->setProperty("value",QVariant((QVariant) (((int)(DistAR)))));
+    ui->lcdNumber_InfrarougeAV->setProperty("value",QVariant((QVariant) (((int)(DistAV)))));
+
 }
 
 void MainWindow::on_pushButton_stop_clicked()

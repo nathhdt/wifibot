@@ -109,7 +109,7 @@
       <string>Connexion</string>
      </property>
      <property name="shortcut">
-      <string/>
+      <string>Return</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_Deconnexion">
@@ -330,7 +330,7 @@
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QLCDNumber" name="lcdNumber_Infrarouge">
+    <widget class="QLCDNumber" name="lcdNumber_InfrarougeAV">
      <property name="geometry">
       <rect>
        <x>230</x>
@@ -348,7 +348,7 @@
       <rect>
        <x>280</x>
        <y>20</y>
-       <width>71</width>
+       <width>91</width>
        <height>20</height>
       </rect>
      </property>
@@ -358,7 +358,38 @@
       </font>
      </property>
      <property name="text">
-      <string>M (IR)</string>
+      <string>cm (AV)</string>
+     </property>
+    </widget>
+    <widget class="QLCDNumber" name="lcdNumber_InfrarougeAR">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>20</y>
+       <width>41</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="value" stdset="0">
+      <double>12.000000000000000</double>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_Infrarouge_2">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>20</y>
+       <width>91</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>cm (AR)</string>
      </property>
     </widget>
    </widget>
@@ -505,6 +536,47 @@
      <property name="icon">
       <iconset>
        <normaloff>../resources/fleche_droite.png</normaloff>../resources/fleche_droite.png</iconset>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_Vitesse">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>340</y>
+      <width>120</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Vitesse</string>
+    </property>
+    <widget class="QSlider" name="horizontalSlider_Vitesse">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>101</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>70</number>
+     </property>
+     <property name="maximum">
+      <number>240</number>
+     </property>
+     <property name="singleStep">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>90</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </widget>
