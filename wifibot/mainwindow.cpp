@@ -1,9 +1,11 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include <QWidget>
 #include <QRegExpValidator>
 #include <QKeyEvent>
 #include <algorithm>
+#include <QtGui>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Connect Signal
     connect(&wifibotv3, SIGNAL(updateUI(QByteArray)), this, SLOT(update_Robot_Informations()));
     ui->gridLayout->addWidget(view);
+
 }
 
 MainWindow::~MainWindow()
@@ -319,4 +322,50 @@ void MainWindow::on_pushButton_Camera_Droite_clicked()
     man->get(request);
     man=NULL;
     free(man);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Z)
+    {
+        on_pushButton_avancer_pressed();
+    }
+
+    if(event->key() == Qt::Key_Q)
+    {
+        on_pushButton_gauche_pressed();
+    }
+
+    if(event->key() == Qt::Key_S)
+    {
+        on_pushButton_reculer_pressed();
+    }
+
+    if(event->key() == Qt::Key_D)
+    {
+        on_pushButton_droite_pressed();
+    }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Z)
+    {
+        on_pushButton_avancer_released();
+    }
+
+    if(event->key() == Qt::Key_Q)
+    {
+        on_pushButton_gauche_released();
+    }
+
+    if(event->key() == Qt::Key_S)
+    {
+        on_pushButton_reculer_released();
+    }
+
+    if(event->key() == Qt::Key_D)
+    {
+        on_pushButton_droite_released();
+    }
 }

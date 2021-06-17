@@ -24,6 +24,10 @@ public:
     Ui::MainWindow *ui;
     ~MainWindow();
 
+protected:
+    void keyPressEvent(QKeyEvent *);
+    void keyReleaseEvent(QKeyEvent *);
+
 private slots:
     void on_pushButton_Connexion_clicked();
     void on_pushButton_Deconnexion_clicked();
