@@ -11,6 +11,26 @@
 class Robot : public QObject {
     Q_OBJECT
 public:
+
+    //Variables des capteurs: on les laisse en publique car elles n'ont aucun impact sur le comportement du robot , sinon on les mettrais en privé
+        //Odométrie
+    double odometryGPrevious=0;
+    double odometryGNow=0;
+    double odometryDPrevious=0;
+    double odometryDNow=0;
+        //Vitesses en m/s
+    float SpeedG=0;
+    float SpeedD=0;
+    float mediumSpeed=0;
+        //Batterie
+        unsigned char batteryLvl=0;
+        //IR
+        unsigned char IRG_AV= 0;
+        unsigned char IRG_AR= 0;
+        unsigned char IRD_AV= 0;
+        unsigned char IRD_AR= 0;
+    //FIN
+
     explicit Robot(QObject *parent = 0);
     bool doConnect(QString ip, int port);
     void disConnect();
@@ -28,6 +48,11 @@ public slots:
     void bytesWritten(qint64 bytes);
     void readyRead();
     void MyTimerSlot();
+<<<<<<< HEAD
+=======
+    QTcpSocket* getSocket();
+
+>>>>>>> Affichage-Infos-capteurs
     void Avant(short speed1, short speed2);
     void Arriere(short speed1, short speed2);
     void Gauche(short speed1, short speed2);
@@ -39,6 +64,7 @@ public slots:
 private:
     QTcpSocket *socket;
     QTimer *TimerEnvoi;
+
 };
 
 #endif // ROBOT_H

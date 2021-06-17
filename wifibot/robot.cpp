@@ -15,10 +15,10 @@ Robot::Robot(QObject *parent) : QObject(parent) {
     TimerEnvoi = new QTimer();
 
     connect(TimerEnvoi, SIGNAL(timeout()), this, SLOT(MyTimerSlot())); //Send data to wifibot timer
+    socket = new QTcpSocket(this); // Socket creation
 }
 
 bool Robot::doConnect(QString ip, int port) {
-    socket = new QTcpSocket(this); // Socket creation
     connect(socket, SIGNAL(connected()),this, SLOT(connected()));
     connect(socket, SIGNAL(disconnected()),this, SLOT(disconnected()));
     connect(socket, SIGNAL(bytesWritten(qint64)),this, SLOT(bytesWritten(qint64)));
@@ -32,7 +32,10 @@ bool Robot::doConnect(QString ip, int port) {
         qDebug() << "Error: " << socket->errorString();
         return false;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> Affichage-Infos-capteurs
     TimerEnvoi->start(75);
     return true;
 }
@@ -56,10 +59,16 @@ void Robot::bytesWritten(qint64 bytes) {
 }
 
 void Robot::readyRead() {
+<<<<<<< HEAD
     qDebug() << "Reading from socket...";
+=======
+    qDebug() << "Reading from socket..."; // read the data from the socket  
+>>>>>>> Affichage-Infos-capteurs
     DataReceived = socket->readAll();
-    emit updateUI(DataReceived);
-    qDebug() << DataReceived[0] << DataReceived[1] << DataReceived[2];
+    if (DataReceived.size()>0){
+        emit updateUI(DataReceived);
+        qDebug() << DataReceived[0] << DataReceived[1] << DataReceived[2];
+    }
 }
 
 void Robot::MyTimerSlot() {
@@ -67,6 +76,11 @@ void Robot::MyTimerSlot() {
     while(Mutex.tryLock());
     socket->write(DataToSend);
     Mutex.unlock();
+}
+
+// // // GETTERS // // //
+QTcpSocket* Robot::getSocket(){
+    return socket;
 }
 
 short Robot::Crc16(unsigned char *_Adresse_tab, unsigned char Taille_Max){
