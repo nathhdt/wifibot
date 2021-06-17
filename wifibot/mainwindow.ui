@@ -109,7 +109,7 @@
       <string>Connexion</string>
      </property>
      <property name="shortcut">
-      <string>Return</string>
+      <string/>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton_Deconnexion">
