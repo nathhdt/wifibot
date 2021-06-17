@@ -262,8 +262,8 @@ void MainWindow::update_Robot_Informations(){
     wifibotv3.setOdometryDNow((odometryD1+ odometryD2+ odometryD3+ odometryD4)/2248);
 
     // Conversion odométrie en vitesse : m/s
-    wifibotv3.setSpeedG(abs(((wifibotv3.getOdometryGNow() - wifibotv3.getOdometryGPrevious())/75)*(10)*(2*3.14*14))); //delta odométrie divisé par temps entre deux mesures consécutives multiplié par rpérimètre de la roue ==> vitesse de la roue par rapport au sol
-    wifibotv3.setSpeedD(abs(((wifibotv3.getOdometryDNow() - wifibotv3.getOdometryDPrevious())/75)*(10)*(2*3.14*14)));
+    wifibotv3.setSpeedG(abs(((wifibotv3.getOdometryGNow() - wifibotv3.getOdometryGPrevious())/75)*(10)*(3.14*14))); //delta odométrie divisé par temps entre deux mesures consécutives multiplié par rpérimètre de la roue ==> vitesse de la roue par rapport au sol
+    wifibotv3.setSpeedD(abs(((wifibotv3.getOdometryDNow() - wifibotv3.getOdometryDPrevious())/75)*(10)*(3.14*14)));
     wifibotv3.setMediumSpeed(abs((wifibotv3.getSpeedG() + wifibotv3.getSpeedD())/2));
 
 
