@@ -281,11 +281,6 @@ void MainWindow::update_Robot_Informations(){
 
 }
 
-void MainWindow::on_pushButton_stop_clicked()
-{
-    update_Robot_Informations();
-}
-
 void MainWindow::on_pushButton_Camera_Bas_clicked()
 {
     QNetworkRequest request;

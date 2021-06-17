@@ -38,14 +38,9 @@ private slots:
     void on_pushButton_droite_released();
     void update_Robot_Informations();
 
-    void on_pushButton_stop_clicked();
-
     void on_pushButton_Camera_Bas_clicked();
-
     void on_pushButton_Camera_Haut_clicked();
-
     void on_pushButton_Camera_Gauche_clicked();
-
     void on_pushButton_Camera_Droite_clicked();
 
 private:
