@@ -40,6 +40,14 @@ private slots:
 
     void on_pushButton_stop_clicked();
 
+    void on_pushButton_Camera_Bas_clicked();
+
+    void on_pushButton_Camera_Haut_clicked();
+
+    void on_pushButton_Camera_Gauche_clicked();
+
+    void on_pushButton_Camera_Droite_clicked();
+
 private:
     Robot wifibotv3;
     QWebEngineView *view;

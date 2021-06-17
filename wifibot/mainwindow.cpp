@@ -75,8 +75,6 @@ void MainWindow::on_pushButton_Connexion_clicked()
             ui->pushButton_avancer->repaint();
             ui->pushButton_reculer->setEnabled(true);
             ui->pushButton_reculer->repaint();
-            ui->pushButton_stop->setEnabled(true);
-            ui->pushButton_stop->repaint();
             ui->pushButton_Screenshot->setEnabled(true);
             ui->pushButton_Screenshot->repaint();
             ui->pushButton_Camera_Haut->setEnabled(true);
@@ -112,8 +110,6 @@ void MainWindow::on_pushButton_Deconnexion_clicked()
     ui->pushButton_avancer->repaint();
     ui->pushButton_reculer->setEnabled(false);
     ui->pushButton_reculer->repaint();
-    ui->pushButton_stop->setEnabled(false);
-    ui->pushButton_stop->repaint();
     ui->pushButton_Screenshot->setEnabled(false);
     ui->pushButton_Screenshot->repaint();
     ui->pushButton_Camera_Haut->setEnabled(false);
@@ -126,6 +122,11 @@ void MainWindow::on_pushButton_Deconnexion_clicked()
     ui->pushButton_Camera_Gauche->repaint();
     ui->horizontalSlider_Vitesse->setEnabled(false);
     ui->horizontalSlider_Vitesse->repaint();
+
+    ui->lcdNumber_Batterie->setProperty("value",QVariant((QVariant) 0));
+    ui->lcdNumber_KMH->setProperty("value",QVariant((QVariant) 0));
+    ui->lcdNumber_InfrarougeAR->setProperty("value",QVariant((QVariant) 0));
+    ui->lcdNumber_InfrarougeAV->setProperty("value",QVariant((QVariant) 0));
 
     // Déconnexion du robot
     wifibotv3.disConnect();
@@ -283,4 +284,44 @@ void MainWindow::update_Robot_Informations(){
 void MainWindow::on_pushButton_stop_clicked()
 {
     update_Robot_Informations();
+}
+
+void MainWindow::on_pushButton_Camera_Bas_clicked()
+{
+    QNetworkRequest request;
+    QNetworkAccessManager* man = new QNetworkAccessManager();
+    request.setUrl(QUrl("http://" + ui->lineEdit_IP->text() + ":8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=200"));
+    man->get(request);
+    man=NULL;
+    free(man);
+}
+
+void MainWindow::on_pushButton_Camera_Haut_clicked()
+{
+    QNetworkRequest request;
+    QNetworkAccessManager* man = new QNetworkAccessManager();
+    request.setUrl(QUrl("http://" + ui->lineEdit_IP->text() + ":8080/?action=command&dest=0&plugin=0&id=10094853&group=1&value=-200"));
+    man->get(request);
+    man=NULL;
+    free(man);
+}
+
+void MainWindow::on_pushButton_Camera_Gauche_clicked()
+{
+    QNetworkRequest request;
+    QNetworkAccessManager* man = new QNetworkAccessManager();
+    request.setUrl(QUrl("http://" + ui->lineEdit_IP->text() + ":8080/?action=command&dest=0&plugin=0&id=10094852&group=1&value=200"));
+    man->get(request);
+    man=NULL;
+    free(man);
+}
+
+void MainWindow::on_pushButton_Camera_Droite_clicked()
+{
+    QNetworkRequest request;
+    QNetworkAccessManager* man = new QNetworkAccessManager();
+    request.setUrl(QUrl("http://" + ui->lineEdit_IP->text() + ":8080/?action=command&dest=0&plugin=0&id=10094852&group=1&value=-200"));
+    man->get(request);
+    man=NULL;
+    free(man);
 }

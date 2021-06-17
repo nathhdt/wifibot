@@ -226,26 +226,6 @@
        <normaloff>../resources/fleche_droite.png</normaloff>../resources/fleche_droite.png</iconset>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_stop">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>20</y>
-       <width>21</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../resources/stop.png</normaloff>../resources/stop.png</iconset>
-     </property>
-    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_Informations">
     <property name="geometry">
