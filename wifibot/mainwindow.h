@@ -7,6 +7,7 @@
 #include <QtWebEngineWidgets>
 #include <QKeyEvent>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -26,7 +27,6 @@ public:
 private slots:
     void on_pushButton_Connexion_clicked();
     void on_pushButton_Deconnexion_clicked();
-<<<<<<< HEAD
     void on_pushButton_Screenshot_clicked();
     void on_pushButton_avancer_pressed();
     void on_pushButton_avancer_released();
@@ -36,11 +36,9 @@ private slots:
     void on_pushButton_gauche_released();
     void on_pushButton_droite_pressed();
     void on_pushButton_droite_released();
-=======
     void update_Robot_Informations();
 
     void on_pushButton_stop_clicked();
->>>>>>> Affichage-Infos-capteurs
 
 private:
     Robot wifibotv3;

@@ -4,10 +4,10 @@
 #include <QRegExpValidator>
 #include <QKeyEvent>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-
 {
     ui->setupUi(this);
 
@@ -19,12 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Setup camera
     view = new QWebEngineView(parent);
-<<<<<<< HEAD
-=======
-
     //Connect Signal
     connect(&wifibotv3, SIGNAL(updateUI(QByteArray)), this, SLOT(update_Robot_Informations()));
->>>>>>> Affichage-Infos-capteurs
     ui->gridLayout->addWidget(view);
 }
 
@@ -37,7 +33,6 @@ void MainWindow::insertConsole(QString text)
 {
     ui->plainTextEdit_console->appendPlainText(text);
 }
-
 
 void MainWindow::on_pushButton_Connexion_clicked()
 {
@@ -160,7 +155,6 @@ void MainWindow::hideCamera()
     view->setZoomFactor(1);
 }
 
-<<<<<<< HEAD
 void MainWindow::on_pushButton_Screenshot_clicked()
 {
     QSize size(512,385);
@@ -218,7 +212,6 @@ void MainWindow::on_pushButton_droite_released()
 {
     wifibotv3.Droite(0, 0);
 }
-=======
 
 // // // // // // // // // // //
 // RECUPERATION INFOS CAPTEURS//
@@ -226,22 +219,22 @@ void MainWindow::on_pushButton_droite_released()
 
 void MainWindow::update_Robot_Informations(){
 
-    //on stocke l'ancienne valeur d'odométrie
-    wifibotv3.odometryGPrevious=wifibotv3.odometryGNow;
-    wifibotv3.odometryDPrevious=wifibotv3.odometryDNow;
+    // On stocke l'ancienne valeur d'odométrie
+    wifibotv3.setOdometryGPrevious(wifibotv3.getOdometryGNow());
+    wifibotv3.setOdometryDPrevious(wifibotv3.getOdometryDNow());
 
-//RECUPERATION DES VALEURS DU SOCKET
+// Récupération des valeurs depuis le socket
 
-    //Niveau de Batterie (et conversion)
-    wifibotv3.batteryLvl= ((unsigned char) wifibotv3.DataReceived[2])*100/185;//Le 100/185 sert à ramener la batterie entre 0 et 100
+    // Niveau de Batterie (et conversion)
+    wifibotv3.setBatteryLevel(((unsigned char) wifibotv3.DataReceived[2])*100/185);//Le 100/185 sert à ramener la batterie entre 0 et 100
 
-    //Capteurs IR
-      wifibotv3.IRG_AV= (unsigned char) wifibotv3.DataReceived[3];
-      wifibotv3.IRG_AR= (unsigned char) wifibotv3.DataReceived[4];
-      wifibotv3.IRD_AV= (unsigned char) wifibotv3.DataReceived[11];
-      wifibotv3.IRD_AR= (unsigned char) wifibotv3.DataReceived[12];
+    // Capteurs IR
+      wifibotv3.setIRG_AV((unsigned char) wifibotv3.DataReceived[3]);
+      wifibotv3.setIRG_AR((unsigned char) wifibotv3.DataReceived[4]);
+      wifibotv3.setIRD_AV((unsigned char) wifibotv3.DataReceived[11]);
+      wifibotv3.setIRD_AR((unsigned char) wifibotv3.DataReceived[12]);
 
-    //Récupération de l'odométrie sur 4 octets puis somme (on prend des double car un unsigned char , sur 24 bits, est trop court)
+    // Récupération de l'odométrie sur 4 octets puis somme (on prend des double car un unsigned char , sur 24 bits, est trop court)
     double odometryG1= (unsigned char) wifibotv3.DataReceived[5];
     double odometryG2= ((unsigned char) wifibotv3.DataReceived[6]<<8);
     double odometryG3= ((unsigned char) wifibotv3.DataReceived[7]<<16);
@@ -253,30 +246,31 @@ void MainWindow::update_Robot_Informations(){
     double odometryD4= ((unsigned char) wifibotv3.DataReceived[16]<<24);
 
 
-//CONVERSION DES VALEURS RECUPEREES
-    //on stocke la nouvelle valeur d'odométrie
-    wifibotv3.odometryGNow= (odometryG1+ odometryG2+ odometryG3+ odometryG4)/2248;
-    wifibotv3.odometryDNow= (odometryD1+ odometryD2+ odometryD3+ odometryD4)/2248;
+    // Conversion des valeurs récupérées
 
-    //Conversion odométrie en vitesse : m/s
-    wifibotv3.SpeedG= abs(((wifibotv3.odometryGNow-wifibotv3.odometryGPrevious)/75)*(10)*(2*3.14*14)); //delta odométrie divisé par temps entre deux mesures consécutives multiplié par rpérimètre de la roue ==> vitesse de la roue par rapport au sol
-    wifibotv3.SpeedD= abs(((wifibotv3.odometryDNow-wifibotv3.odometryDPrevious)/75)*(10)*(2*3.14*14));
-    wifibotv3.mediumSpeed=abs((wifibotv3.SpeedG+wifibotv3.SpeedD)/2);
+    // on stocke la nouvelle valeur d'odométrie
+    wifibotv3.setOdometryGNow((odometryG1+ odometryG2+ odometryG3+ odometryG4)/2248);
+    wifibotv3.setOdometryDNow((odometryD1+ odometryD2+ odometryD3+ odometryD4)/2248);
+
+    // Conversion odométrie en vitesse : m/s
+    wifibotv3.setSpeedG(abs(((wifibotv3.getOdometryGNow() - wifibotv3.getOdometryGPrevious())/75)*(10)*(2*3.14*14))); //delta odométrie divisé par temps entre deux mesures consécutives multiplié par rpérimètre de la roue ==> vitesse de la roue par rapport au sol
+    wifibotv3.setSpeedD(abs(((wifibotv3.getOdometryDNow() - wifibotv3.getOdometryDPrevious())/75)*(10)*(2*3.14*14)));
+    wifibotv3.setMediumSpeed(abs((wifibotv3.getSpeedG() + wifibotv3.getSpeedD())/2));
 
 
-    //Conversion des valeurs des capteurs en distance de 10 à 130 cm
-    unsigned char DistG_AV=10+((255-wifibotv3.IRG_AV)*130/255);
-    unsigned char DistG_AR=10+((255-wifibotv3.IRG_AR)*130/255);
-    unsigned char DistD_AV=10+((255-wifibotv3.IRD_AV)*130/255);
-    unsigned char DistD_AR=10+((255-wifibotv3.IRD_AR)*130/255);
+    // Conversion des valeurs des capteurs en distance de 10 à 130 cm
+    unsigned char DistG_AV=10+((255-wifibotv3.getIRG_AV())*130/255);
+    unsigned char DistG_AR=10+((255-wifibotv3.getIRG_AR())*130/255);
+    unsigned char DistD_AV=10+((255-wifibotv3.getIRD_AV())*130/255);
+    unsigned char DistD_AR=10+((255-wifibotv3.getIRD_AR())*130/255);
 
-    qDebug()<< wifibotv3.batteryLvl;
-    ui->lcdNumber_Batterie->setProperty("value",QVariant((QVariant) ((wifibotv3.batteryLvl))));
+    // Update UI
+    qDebug()<< wifibotv3.getBatteryLvl();
+    ui->lcdNumber_Batterie->setProperty("value",QVariant((QVariant) ((wifibotv3.getBatteryLvl()))));
+    ui->lcdNumber_KMH->setProperty("value",QVariant((QVariant) (((int)(wifibotv3.getMediumSpeed()*3.6)))));
 }
 
 void MainWindow::on_pushButton_stop_clicked()
 {
     update_Robot_Informations();
 }
-
->>>>>>> Affichage-Infos-capteurs

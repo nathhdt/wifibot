@@ -32,10 +32,6 @@ bool Robot::doConnect(QString ip, int port) {
         qDebug() << "Error: " << socket->errorString();
         return false;
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> Affichage-Infos-capteurs
     TimerEnvoi->start(75);
     return true;
 }
@@ -59,11 +55,8 @@ void Robot::bytesWritten(qint64 bytes) {
 }
 
 void Robot::readyRead() {
-<<<<<<< HEAD
     qDebug() << "Reading from socket...";
-=======
-    qDebug() << "Reading from socket..."; // read the data from the socket  
->>>>>>> Affichage-Infos-capteurs
+    qDebug() << "Reading from socket..."; // read the data from the socket
     DataReceived = socket->readAll();
     if (DataReceived.size()>0){
         emit updateUI(DataReceived);
@@ -184,28 +177,98 @@ void Robot::Stop(){
     connect(TimerEnvoi, SIGNAL(timeout()), this, SLOT(MyTimerSlot()));
 }
 
-// // // // // // // // // // // //
-        //SLOW SPEED TRANSITION  //
-// // // // // // // // // // // //
+double Robot::getOdometryGPrevious() {
+    return odometryGPrevious;
+}
 
-bool Robot::slowSpeedChange(int endValue, float pas){ //Goal is to provide a progressive acceleration to the wheels
+double Robot::getOdometryGNow() {
+    return odometryGNow;
+}
 
-    if (endValue<_speed){
-        pas=-pas;
-    }
+double Robot::getOdometryDPrevious() {
+    return odometryDPrevious;
+}
 
-    int nowValue= (int) (_speed + pas);
-    int flag=true;
+double Robot::getOdometryDNow() {
+    return odometryDNow;
+}
 
-    if (pas>=1){
-        if (nowValue<endValue){
-            _speed=nowValue;
-        }
-        else{
-            _speed=endValue;
-            flag=false;
-        }
-    }
+float Robot::getSpeedG() {
+    return SpeedG;
+}
 
-    return flag;//if speed can be incremented , flag is true, if speed has reached the end Value, it returns false.
+float Robot::getSpeedD() {
+    return SpeedD;
+}
+
+float Robot::getMediumSpeed() {
+    return mediumSpeed;
+}
+
+unsigned char Robot::getIRG_AV() {
+    return IRG_AV;
+}
+
+unsigned char Robot::getIRG_AR() {
+    return IRG_AR;
+}
+
+unsigned char Robot::getIRD_AV() {
+    return IRD_AV;
+}
+
+unsigned char Robot::getIRD_AR() {
+    return IRD_AR;
+}
+
+unsigned char Robot::getBatteryLvl() {
+    return batteryLvl;
+}
+
+void Robot::setOdometryGPrevious(double _odometryGPrevious) {
+    odometryGPrevious = _odometryGPrevious;
+}
+
+void Robot::setOdometryGNow(double _odometryGNow) {
+    odometryGNow = _odometryGNow;
+}
+
+void Robot::setOdometryDPrevious(double _odometryDPrevious) {
+odometryDPrevious = _odometryDPrevious;
+}
+
+void Robot::setOdometryDNow(double _odometryDNow) {
+ odometryDNow = _odometryDNow;
+}
+
+void Robot::setSpeedG(float _speedG) {
+    SpeedG = _speedG;
+}
+
+void Robot::setSpeedD(float _speedD) {
+    SpeedD = _speedD;
+}
+
+void Robot::setMediumSpeed(float _mediumSpeed) {
+    mediumSpeed = _mediumSpeed;
+}
+
+void Robot::setIRG_AV(unsigned char _IRG_AV) {
+    IRG_AV = _IRG_AV;
+}
+
+void Robot::setIRG_AR(unsigned char _IRG_AR) {
+    IRG_AR = _IRG_AR;
+}
+
+void Robot::setIRD_AV(unsigned char _IRD_AV) {
+    IRD_AV = _IRD_AV;
+}
+
+void Robot::setIRD_AR(unsigned char _IRD_AR) {
+    IRD_AR = _IRD_AR;
+}
+
+void Robot::setBatteryLevel(unsigned char _batteryLevel) {
+    batteryLvl = _batteryLevel;
 }
